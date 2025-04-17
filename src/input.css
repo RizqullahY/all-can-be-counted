@@ -1,1 +1,8 @@
 @import "tailwindcss";  
+
+/* PLACEHOLDER IN WINRATE COUNTER */
+#currentWinrate:not(:placeholder-shown) + label,
+#totalMatches:not(:placeholder-shown) + label,
+#targetWinrate:not(:placeholder-shown) + label {
+    @apply -top-6 text-gray-600 text-sm;
+}
