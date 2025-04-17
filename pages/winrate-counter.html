@@ -10,12 +10,17 @@
   <body>
     <div class="w-full justify-center">
       <div class="m-6 flex flex-col items-center justify-center">
-        <h2 class="text-xl font-semibold mb-10">Wirate Calc</h2>
+        <a href="../index.html" class="m-2 rounded-full bg-slate-500 text-white p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
+        </a>
+        <h2 class="text-xl font-semibold mb-10">Winrate Calc</h2>
         <div class="flex flex-col gap-10">
           <!-- Current Winrate -->
           <div class="relative bg-white rounded-lg">
             <input
-              placeholder="Current Winrate"
+              placeholder=""
               class="peer w-60 bg-transparent placeholder-transparent text-gray-800 text-sm border-none rounded-md px-3 py-2 transition box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;duration-300 ease focus:outline-none focus:border-none focus:shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] shadow-sm"
               id="currentWinrate"
               type="text"
@@ -30,7 +35,7 @@
           <!-- Total Matches -->
           <div class="relative bg-white rounded-lg">
             <input
-              placeholder="Total Matches"
+              placeholder=""
               class="peer w-60 bg-transparent placeholder-transparent text-gray-800 text-sm border-none rounded-md px-3 py-2 transition box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;duration-300 ease focus:outline-none focus:border-none focus:shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] shadow-sm"
               id="totalMatches"
               type="text"
@@ -45,7 +50,7 @@
           <!-- Target Winrate -->
           <div class="relative bg-white rounded-lg">
             <input
-              placeholder="Target Winrate"
+              placeholder=""
               class="peer w-60 bg-transparent placeholder-transparent text-gray-800 text-sm border-none rounded-md px-3 py-2 transition box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;duration-300 ease focus:outline-none focus:border-none focus:shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] shadow-sm"
               id="targetWinrate"
               type="text"
@@ -58,7 +63,7 @@
             </label>
           </div>
           <!-- Result -->
-          <div id="result" class="mt-6 text-gray-700 text-wrap"></div>
+          <div id="result" class="mt-6 text-gray-700 text-justify w-60"></div>
         </div>
       </div>
     </div>
