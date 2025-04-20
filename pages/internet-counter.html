@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../src/output.css" />
+    <script src="../lib/jquery.js"></script>
+    <title>Internet Calc</title>
+  </head>
+  <body class="bg-gray-100 p-6">
+    <div class="max-w-3xl mx-auto bg-white rounded-md shadow-md p-6">
+      <h1 class="text-2xl font-bold mb-4 text-center text-indigo-600">Bandingkan Paket Data</h1>
+
+      <div id="comparison-container">
+        <div class="mb-4 p-4 border rounded-md relative">
+          <h2 class="text-lg font-semibold mb-2">Paket 1</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="harga1" class="block text-gray-700 text-sm font-bold mb-2">Harga (Rp):</label>
+              <input type="number" id="harga1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan harga">
+            </div>
+            <div>
+              <label for="kuota1" class="block text-gray-700 text-sm font-bold mb-2">Kuota (GB):</label>
+              <input type="number" id="kuota1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan kuota">
+            </div>
+            <div>
+              <label for="masa_aktif1" class="block text-gray-700 text-sm font-bold mb-2">Masa Aktif (Hari):</label>
+              <input type="number" id="masa_aktif1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan masa aktif">
+            </div>
+          </div>
+          <button class="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none remove-comparison" data-comparison-id="1">
+            <img src="../assets/icons/trash.png" alt="" class="w-6">
+          </button>
+        </div>
+      </div>
+
+      <button id="add-comparison" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">
+        Tambah Perbandingan
+      </button>
+
+      <div id="result" class="mt-6 p-4 border rounded-md bg-gray-50">
+        <h2 class="text-lg font-semibold mb-2">Hasil Perbandingan</h2>
+        <table class="table-auto w-full">
+          <thead>
+            <tr>
+              <th class="px-4 py-2">Paket</th>
+              <th class="px-4 py-2">Harga per GB</th>
+              <th class="px-4 py-2">Harga per Hari</th>
+              <th class="px-4 py-2">GB per Hari</th>
+            </tr>
+          </thead>
+          <tbody id="result-body">
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        let comparisonCount = 1;
+
+        function calculateAndDisplay() {
+          $('#result-body').empty();
+          for (let i = 1; i <= comparisonCount; i++) {
+            const harga = parseFloat($(`#harga${i}`).val()) || 0;
+            const kuota = parseFloat($(`#kuota${i}`).val()) || 0;
+            const masaAktif = parseFloat($(`#masa_aktif${i}`).val()) || 0;
+
+            const hargaPerGB = kuota > 0 ? (harga / kuota).toFixed(2) : '-';
+            const hargaPerHari = masaAktif > 0 ? (harga / masaAktif).toFixed(2) : '-';
+            const gbPerHari = masaAktif > 0 ? (kuota / masaAktif).toFixed(2) : '-';
+
+            $('#result-body').append(`
+              <tr>
+                <td class="border px-4 py-2">Paket ${i}</td>
+                <td class="border px-4 py-2">${hargaPerGB}</td>
+                <td class="border px-4 py-2">${hargaPerHari}</td>
+                <td class="border px-4 py-2">${gbPerHari}</td>
+              </tr>
+            `);
+          }
+        }
+
+        $('#comparison-container').on('input', 'input[type="number"]', calculateAndDisplay);
+
+        $('#add-comparison').click(function() {
+          comparisonCount++;
+          const newComparison = `
+            <div class="mb-4 p-4 border rounded-md relative">
+              <h2 class="text-lg font-semibold mb-2">Paket ${comparisonCount}</h2>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="harga${comparisonCount}" class="block text-gray-700 text-sm font-bold mb-2">Harga (Rp):</label>
+                  <input type="number" id="harga${comparisonCount}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan harga">
+                </div>
+                <div>
+                  <label for="kuota${comparisonCount}" class="block text-gray-700 text-sm font-bold mb-2">Kuota (GB):</label>
+                  <input type="number" id="kuota${comparisonCount}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan kuota">
+                </div>
+                <div>
+                  <label for="masa_aktif${comparisonCount}" class="block text-gray-700 text-sm font-bold mb-2">Masa Aktif (Hari):</label>
+                  <input type="number" id="masa_aktif${comparisonCount}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan masa aktif">
+                </div>
+              </div>
+              <button class="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none remove-comparison" data-comparison-id="${comparisonCount}">
+                <img src="../assets/icons/trash.png" alt="" class="w-6">    
+              </button>
+            </div>
+          `;
+          $('#comparison-container').append(newComparison);
+        });
+
+        $('#comparison-container').on('click', '.remove-comparison', function() {
+          const comparisonIdToRemove = parseInt($(this).data('comparison-id'));
+          $(this).closest('.mb-4').remove();
+
+          // Re-number the remaining comparison sections and update their data-comparison-id
+          $('.mb-4').each(function(index) {
+            const newIndex = index + 1;
+            $(this).find('h2').text(`Paket ${newIndex}`);
+            $(this).find('label[for^="harga"]').attr('for', `harga${newIndex}`).text('Harga (Rp):');
+            $(this).find('#harga' + $(this).find('.remove-comparison').data('comparison-id')).attr('id', `harga${newIndex}`);
+            $(this).find('label[for^="kuota"]').attr('for', `kuota${newIndex}`).text('Kuota (GB):');
+            $(this).find('#kuota' + $(this).find('.remove-comparison').data('comparison-id')).attr('id', `kuota${newIndex}`);
+            $(this).find('label[for^="masa_aktif"]').attr('for', `masa_aktif${newIndex}`).text('Masa Aktif (Hari):');
+            $(this).find('#masa_aktif' + $(this).find('.remove-comparison').data('comparison-id')).attr('id', `masa_aktif${newIndex}`);
+            $(this).find('.remove-comparison').attr('data-comparison-id', newIndex);
+          });
+
+          comparisonCount--;
+          calculateAndDisplay();
+        });
+      });
+    </script>
+  </body>
+</html>
